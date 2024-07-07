@@ -1,6 +1,12 @@
+import { parser } from "@/utils/parser";
 import Head from "next/head";
+import { ChangeEvent } from "react";
 
 export default function Home() {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    parser(event.target.value)
+  }
+
   return (
     <>
       <Head>
@@ -9,7 +15,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <input type="text" defaultValue="* * * * * *" />
+      <input type="text" defaultValue="* * * * * *" onChange={handleChange} />
     </>
   );
 }
