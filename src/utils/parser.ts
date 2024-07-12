@@ -1,1 +1,3 @@
-export function parser(foo: string) {}
+export function parser(foo: string): boolean {
+  return true
+}
