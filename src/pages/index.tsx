@@ -1,6 +1,6 @@
-import { parser } from "@/utils/parser";
-import Head from "next/head";
-import { ChangeEvent, useState } from "react";
+import { parser } from "@/utils/parser"
+import Head from "next/head"
+import { ChangeEvent, useState } from "react"
 
 export default function Home() {
   const [status, setStatus] = useState(false)
@@ -18,7 +18,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <input type="text" defaultValue="* * * * * *" onChange={handleChange} style={{ borderColor: status ? 'green' : 'red'}} />
+      <input
+        type="text"
+        defaultValue="* * * * * *"
+        onChange={handleChange}
+        style={{ borderColor: status ? "green" : "red" }}
+      />
     </>
-  );
+  )
 }
