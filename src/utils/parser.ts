@@ -1,14 +1,15 @@
-export function parser(originalExpression: string): boolean {
-  if (typeof originalExpression !== "string") return false
+import { isInRange, isNumber } from "./common"
 
-  const expression = originalExpression.split(" ").filter(Boolean)
-  const minutes = +expression[0]
+const invalidExpr = false
 
-  if (!isNumber(minutes) || !isInRange(minutes, 0, 59)) return false
+export function parser(originalExpr: string): boolean {
+  if (typeof originalExpr !== "string") return invalidExpr
 
-  return true
+  const [minutes] = originalExpr.split(" ").filter(Boolean) ?? []
+
+  return validateMinutes(minutes)
 }
 
-const isNumber = (n: any) => !isNaN(parseInt(n)) && isFinite(n)
-
-const isInRange = (n: number, min: number, max: number) => n >= min && n <= max
+function validateMinutes(minutesExpr: string) {
+  return !minutesExpr.split(",").some((minute) => !isNumber(minute) || !isInRange(minute, 0, 59))
+}

@@ -18,4 +18,8 @@ describe("Particle validations: values", () => {
   test("should returns false if minutes are not in the range 0-59", () => {
     buildMinutesNotInRange().forEach((expr: any) => expect(parser(expr)).toBeFalsy())
   })
+
+  test("comma can be used in expression", () => {
+    expect(parser("0,1,4,6 * * * * *")).toBeTruthy()
+  })
 })
