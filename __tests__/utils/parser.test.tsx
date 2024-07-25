@@ -2,7 +2,7 @@ import { parser } from "@/utils/parser"
 import { describe, expect, test } from "vitest"
 import { buildInvalidMinutes, buildMinutesNotInRange, buildValidMinutes } from "../../tests/generate"
 
-describe("Particle validations: values", () => {
+describe("Particle validations: minutes", () => {
   test("should returns true if minutes are a number", () => {
     buildValidMinutes().forEach((expr: any) => expect(parser(expr)).toBeTruthy())
   })
@@ -20,6 +20,12 @@ describe("Particle validations: values", () => {
   })
 
   test("comma can be used in expression", () => {
-    expect(parser("0,1,4,6 * * * * *")).toBeTruthy()
+    expect(parser("0,1,4,6,59 * * * * *")).toBeTruthy()
+  })
+
+  test("should not allow comma to be used in sequence", () => {
+    expect(parser("0,1,4,,,6 * * * * *")).toBeFalsy()
+    expect(parser(",,0,1,4,6 * * * * *")).toBeFalsy()
+    expect(parser("0,1,4,6,, * * * * *")).toBeFalsy()
   })
 })
